@@ -47,7 +47,7 @@ class GoPiggy(pigo.Pigo):
         print("Piggy dance")
         ##### WRITE YOUR FIRST PROJECT HERE
         print('safe to dance?')
-        while self.isClear()) is True:
+        while self.isClear() is True:
         self.encR(18)
         for x in range(100, 200, 25):
             print('speed is set to:' + str(x))
