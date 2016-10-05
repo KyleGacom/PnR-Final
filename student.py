@@ -47,22 +47,24 @@ class GoPiggy(pigo.Pigo):
         print("Piggy dance")
         ##### WRITE YOUR FIRST PROJECT HERE
         print('safe to dance?')
-        for x in range(100, 200, 25):
-            while self.isClear() is True:
-                self.encR(18)
-                print('speed is set to:' + str(x))
-                servo(20)
-                set_speed(x)
-                self.encB(5)
-                self.encR(2)
-                self.encL(2)
-                self.encF(5)
-                self.encR(18)
-                self.encL(18)
-                self.encR(18)
-                self.encL(18)
-                servo(120)
-                time.sleep(.1)
+        x = 100
+        while self.isClear() is <= x 200:
+            self.encR(18)
+            print('speed is set to:' + str(x))
+            servo(20)
+            set_speed(x)
+            self.encB(5)
+            self.encR(2)
+            self.encL(2)
+            self.encF(5)
+            self.encR(18)
+            self.encL(18)
+            self.encR(18)
+            self.encL(18)
+            servo(120)
+            time.sleep(.1)
+            x += 25
+
 
 
 
