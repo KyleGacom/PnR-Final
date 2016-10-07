@@ -46,7 +46,9 @@ class GoPiggy(pigo.Pigo):
     def dance(self):
         print("Piggy dance")
         ##### WRITE YOUR FIRST PROJECT HERE
+        print('-----------------------')
         print('safe to dance?')
+        print('-----------------------')
         x = 100
         while self.isClear() and x <= 200:
             self.encR(18)
