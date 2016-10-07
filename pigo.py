@@ -145,7 +145,7 @@ class Pigo(object):
             time.sleep(.01)
 
     def isClear(self) -> bool:
-        for x in range((self.MIDPOINT - 15), (self.MIDPOINT + 15), 5):
+        for x in range((self.MIDPOINT - 40), (self.MIDPOINT + 40), 5):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
