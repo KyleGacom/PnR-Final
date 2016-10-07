@@ -162,9 +162,9 @@ class Pigo(object):
             self.scan[x] = scan1
             print("Degree: " + str(x) + ", distance: " + str(scan1))
             if scan1 < self.STOP_DIST:
-                print('-----------------------')
+                print('------------------------')
                 print("Doesn't look clear to me")
-                print('-----------------------')
+                print('------------------------')
                 return False
         return True
 
