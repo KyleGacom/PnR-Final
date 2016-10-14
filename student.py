@@ -73,8 +73,11 @@ class GoPiggy(pigo.Pigo):
         print('-----------------------')
         print('safe to dance?')
         print('-----------------------')
+        #Starting speed
         x = 100
+        #Tells robot to run super clear unless the speed is above 190
         while self.superClear() and x <= 190:
+            #DANCE PIGGY DANCE
             self.encR(18)
             print('speed is set to:' + str(x))
             servo(20)
