@@ -42,6 +42,30 @@ class GoPiggy(pigo.Pigo):
         ans = input("Your selection: ")
         menu.get(ans, [None, error])[1]()
 
+    def superClear(self):
+        #check in front
+        if not self.isClear():
+            print("Front is not clear")
+            return False
+        #turn 90 right and print "checking right"
+        self.encR(4)
+        if not self.isClear():
+            print("Problem to the right")
+            return False
+        #turn 90 right and print "checking behind"
+        self.encR(4)
+        if not self.isClear():
+            print("Behind is not clear")
+            return False
+        #turn right 90 and check left
+        self.encR(4)
+        if not self.isClear():
+            print("Left is not clear")
+            return False
+        #Turns to front and begins dance
+        self.encR(4)
+        return True
+
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
         print("Piggy dance")
@@ -50,7 +74,7 @@ class GoPiggy(pigo.Pigo):
         print('safe to dance?')
         print('-----------------------')
         x = 100
-        while self.isClear() and x <= 200:
+        while self.superClear() and x <= 190:
             self.encR(18)
             print('speed is set to:' + str(x))
             servo(20)
@@ -74,7 +98,7 @@ class GoPiggy(pigo.Pigo):
             self.encF(5)
             servo(96)
             time.sleep(.1)
-            x += 25
+            x += 30
 
 
 
