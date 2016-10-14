@@ -46,22 +46,30 @@ class GoPiggy(pigo.Pigo):
         set_speed(150)
         #check in front
         if not self.isClear():
+            print('------------------------')
             print("Front is not clear")
+            print('------------------------')
             return False
         #turn 90 right and print "checking right"
         self.encR(6)
         if not self.isClear():
+            print('------------------------')
             print("Problem to the right")
+            print('------------------------')
             return False
         #turn 90 right and print "checking behind"
         self.encR(6)
         if not self.isClear():
+            print('------------------------')
             print("Behind is not clear")
+            print('------------------------')
             return False
         #turn right 90 and check left
         self.encR(6)
         if not self.isClear():
+            print('------------------------')
             print("Left is not clear")
+            print('------------------------')
             return False
         #Turns to front and begins dance
         self.encR(6)
