@@ -49,22 +49,22 @@ class GoPiggy(pigo.Pigo):
             print("Front is not clear")
             return False
         #turn 90 right and print "checking right"
-        self.encR(5)
+        self.encR(6)
         if not self.isClear():
             print("Problem to the right")
             return False
         #turn 90 right and print "checking behind"
-        self.encR(5)
+        self.encR(6)
         if not self.isClear():
             print("Behind is not clear")
             return False
         #turn right 90 and check left
-        self.encR(5)
+        self.encR(6)
         if not self.isClear():
             print("Left is not clear")
             return False
         #Turns to front and begins dance
-        self.encR(5)
+        self.encR(6)
         return True
 
     # A SIMPLE DANCE ALGORITHM
