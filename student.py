@@ -43,6 +43,7 @@ class GoPiggy(pigo.Pigo):
         menu.get(ans, [None, error])[1]()
 
     def superClear(self):
+        set_speed(150)
         #check in front
         if not self.isClear():
             print("Front is not clear")
