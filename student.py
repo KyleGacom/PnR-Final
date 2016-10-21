@@ -121,25 +121,15 @@ class GoPiggy(pigo.Pigo):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
         #check if its clear
-        while self.isClear():
-            #move forward
-            self.encF(10)
-        #if false check turn right 90 and check again(Facing right)
-        else:
-            self.encR(5)
+        while True:
             while self.isClear():
-                self.encF(10)
-            # if not clear turns again and scans (facing backwards)
-            else:
+                encF(10)
+            answer = self. choosePath()
+            if answer == "left":
+                self.encL(5)
+            elif answer == "right":
                 self.encR(5)
-                while self.isClear():
-                    self.encF(10)
-            #if not clear turns again and scans (facing left)
-                else:
-                    self.encR(5)
-                    while self.isClear():
-                        self.encF(10)
-                        #should be clear by now for the robot to go
+
 
 
 
