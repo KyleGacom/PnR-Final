@@ -126,7 +126,7 @@ class GoPiggy(pigo.Pigo):
             self.encF(10)
         #if false check turn right 90 and check again
         else:
-            self.encR(6)
+            self.encR(5)
             while self.isClear():
                 self.encF(10)
 
