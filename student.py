@@ -110,6 +110,7 @@ class GoPiggy(pigo.Pigo):
             self.encF(5)
             servo(96)
             time.sleep(.1)
+            #Adds 30 speed after it does the dance and dances again
             x += 30
 
 
@@ -119,6 +120,13 @@ class GoPiggy(pigo.Pigo):
     def nav(self):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
+        #TODO if while loop fails check for other paths
+        #check if its clear
+        while self.isClear():
+            #move forward
+            self.encF(10)
+
+
 
 
 ####################################################
