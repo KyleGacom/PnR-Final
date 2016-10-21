@@ -131,14 +131,14 @@ class GoPiggy(pigo.Pigo):
                 self.encF(10)
             # if not clear turns again and scans (facing backwards)
             else:
-            self.encR(5)
-            while self.isClear():
-                self.encF(10)
-            # if not clear turns again and scans (facing left)
-            else:
                 self.encR(5)
                 while self.isClear():
                     self.encF(10)
+            # if not clear turns again and scans (facing left)
+                else:
+                    self.encR(5)
+                    while self.isClear():
+                        self.encF(10)
 
 
 
