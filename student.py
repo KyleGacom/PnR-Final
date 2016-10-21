@@ -121,14 +121,14 @@ class GoPiggy(pigo.Pigo):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
         #check if its clear
-        if self.isClear():
+        while self.isClear():
             #move forward
             self.encF(10)
         #if false check turn right 90 and check again
         else:
             self.encR(6)
             while self.isClear():
-                self.ecnF(10)
+                self.encF(10)
 
 
 
