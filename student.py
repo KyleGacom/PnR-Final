@@ -33,6 +33,7 @@ class GoPiggy(pigo.Pigo):
                 "2": ("Rotate", self.rotate),
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
+                "5": ("Cruise", self.cruise),
                 "q": ("Quit", quit)
                 }
         # loop and print the menu...
@@ -41,6 +42,18 @@ class GoPiggy(pigo.Pigo):
         #
         ans = input("Your selection: ")
         menu.get(ans, [None, error])[1]()
+
+    def cruise(self):
+        print("is it clear in front?")
+        clear = self.isClear()
+        print(clear)
+        if clear:
+            print("Moving")
+            fwd()
+        while True:
+            if not self.isClear():
+                print("Stop")
+                self.stop()
 
     def superClear(self):
         set_speed(150)
@@ -119,11 +132,12 @@ class GoPiggy(pigo.Pigo):
     # AUTONOMOUS DRIVING
     def nav(self):
         print("Piggy nav")
-        ##### WRITE YOUR FINAL PROJECT HERE
         #check if its clear
         while True:
             while self.isClear():
+                #if clear moves forward
                 self.encF(7)
+            #checks which way is clear
             answer = self.choosePath()
             if answer == "left":
                 self.encL(3)
