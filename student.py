@@ -124,7 +124,7 @@ class GoPiggy(pigo.Pigo):
         while True:
             while self.isClear():
                 self.encF(7)
-            answer = self. choosePath()
+            answer = self.choosePath()
             if answer == "left":
                 self.encL(3)
             elif answer == "right":
