@@ -123,7 +123,7 @@ class GoPiggy(pigo.Pigo):
         #check if its clear
         while True:
             while self.isClear():
-                self.encF(10)
+                self.encF(7)
             answer = self. choosePath()
             if answer == "left":
                 self.encL(3)
