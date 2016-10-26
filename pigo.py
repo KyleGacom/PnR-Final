@@ -127,7 +127,7 @@ class Pigo(object):
     def wideScan(self):
         #dump all values
         self.flushScan()
-        for x in range(self.MIDPOINT-60, self.MIDPOINT+60, +2):
+        for x in range(self.MIDPOINT-60, self.MIDPOINT+60, +10):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
@@ -145,7 +145,7 @@ class Pigo(object):
             time.sleep(.01)
 
     def isClear(self) -> bool:
-        for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), 15):
+        for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), +15):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
