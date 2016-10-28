@@ -82,9 +82,9 @@ class GoPiggy(pigo.Pigo):
                     self.stop()
                     answer = self.choosePath()
                     if answer == "left":
-                        self.encL(3)
+                        self.encL(5)
                     elif answer == "right":
-                        self.encR(3)
+                        self.encR(5)
 
     def superClear(self):
         set_speed(150)
