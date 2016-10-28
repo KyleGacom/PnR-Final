@@ -69,22 +69,23 @@ class GoPiggy(pigo.Pigo):
 
     def cruise(self):
         set_left_speed(100)
-        set_right_speed(100)
+        set_right_speed(120)
         print("is it clear in front?")
         clear = self.frontClear()
         print(clear)
-        if clear:
-            print("Moving")
-            fwd()
         while True:
-            if not self.frontClear():
-                print("Stop")
-                self.stop()
-                answer = self.choosePath()
-                if answer == "left":
-                    self.encL(3)
-                elif answer == "right":
-                    self.encR(3)
+            if clear:
+                print("Moving")
+                fwd()
+            while True:
+                if not self.frontClear():
+                    print("Stop")
+                    self.stop()
+                    answer = self.choosePath()
+                    if answer == "left":
+                        self.encL(3)
+                    elif answer == "right":
+                        self.encR(3)
 
     def superClear(self):
         set_speed(150)
