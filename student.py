@@ -77,7 +77,7 @@ class GoPiggy(pigo.Pigo):
             print("Moving")
             fwd()
         while True:
-            if not self.isClear():
+            if not self.frontClear():
                 print("Stop")
                 self.stop()
                 answer = self.choosePath()
