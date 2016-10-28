@@ -44,7 +44,7 @@ class GoPiggy(pigo.Pigo):
         menu.get(ans, [None, error])[1]()
 
     def frontClear(self) -> bool:
-        for x in range((self.MIDPOINT), (self.MIDPOINT)):
+        for x in range((self.MIDPOINT + 0), (self.MIDPOINT - 0)):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
