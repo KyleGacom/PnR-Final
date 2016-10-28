@@ -52,6 +52,8 @@ class GoPiggy(pigo.Pigo):
             fwd()
         while True:
             if not self.isClear():
+                print("Stop")
+                self.stop()
                 answer = self.choosePath()
                 if answer == "left":
                     self.encL(3)
