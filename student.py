@@ -69,7 +69,7 @@ class GoPiggy(pigo.Pigo):
 
     def cruise(self):
         set_left_speed(100)
-        set_right_speed(115)
+        set_right_speed(110)
         print("is it clear in front?")
         clear = self.frontClear()
         print(clear)
