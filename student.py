@@ -14,6 +14,8 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 96
     STOP_DIST = 20
+    RIGHT_SPEED = 101
+    LEFT_SPEED = 103
 
     # CONSTRUCTOR
     def __init__(self):
@@ -21,6 +23,7 @@ class GoPiggy(pigo.Pigo):
         # this method makes sure Piggy is looking forward
         # self.calibrate()
         # let's use an event-driven model, make a handler of sorts to listen for "events"
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
         while True:
             self.stop()
             self.handler()
@@ -68,8 +71,6 @@ class GoPiggy(pigo.Pigo):
         return True
 
     def cruise(self):
-        set_left_speed(100)
-        set_right_speed(103)
         print("is it clear in front?")
         clear = self.frontClear()
         print(clear)
