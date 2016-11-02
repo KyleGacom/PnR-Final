@@ -47,7 +47,7 @@ class GoPiggy(pigo.Pigo):
         menu.get(ans, [None, error])[1]()
 
     def frontClear(self) -> bool:
-        for x in range((self.MIDPOINT - 1), (self.MIDPOINT + 1), +1):
+        for x in range((self.MIDPOINT - 1), (self.MIDPOINT + 1)):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
@@ -71,17 +71,24 @@ class GoPiggy(pigo.Pigo):
         return True
 
     def cruise(self):
-        print("is it clear in front?")
+        print('------------------------')
+        print("-is it clear in front?-")
+        print('------------------------')
+        #made a front clear which only scans the front
         clear = self.frontClear()
         print(clear)
         while True:
             if clear:
-                print("Moving")
+                print('------------------------')
+                print("--------Moving----------")
+                print('------------------------')
                 fwd()
+                #once its no longer clear it stops and checks which way to go
                 if not self.frontClear():
                     print("Stop")
                     self.stop()
                     answer = self.choosePath()
+                    #if left is more clear it goes left other wise it turns right
                     if answer == "left":
                         self.encL(7)
                     elif answer == "right":
