@@ -72,7 +72,7 @@ class GoPiggy(pigo.Pigo):
 
     def cruise(self):
         print('------------------------')
-        print("-is it clear in front?-")
+        print(" is it clear in front? ")
         print('------------------------')
         #made a front clear which only scans the front
         clear = self.frontClear()
@@ -80,12 +80,14 @@ class GoPiggy(pigo.Pigo):
         while True:
             if clear:
                 print('------------------------')
-                print("--------Moving----------")
+                print("------- Moving ---------")
                 print('------------------------')
                 fwd()
                 #once its no longer clear it stops and checks which way to go
                 if not self.frontClear():
-                    print("Stop")
+                    print('------------------------')
+                    print("--------- Stop ---------")
+                    print('------------------------')
                     self.stop()
                     answer = self.choosePath()
                     #if left is more clear it goes left other wise it turns right
