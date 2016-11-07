@@ -46,6 +46,49 @@ class GoPiggy(pigo.Pigo):
         ans = input("Your selection: ")
         menu.get(ans, [None, error])[1]()
 
+    def widerScan(self):
+        # dump all values
+        self.flushScan()
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +2):
+            servo(x)
+            time.sleep(.1)
+            scan1 = us_dist(15)
+            time.sleep(.1)
+            # double check the distance
+            scan2 = us_dist(15)
+            # if I found a different distance the second time....
+            if abs(scan1 - scan2) > 2:
+                scan3 = us_dist(15)
+                time.sleep(.1)
+                # take another scan and average the three together
+                scan1 = (scan1 + scan2 + scan3) / 3
+            self.scan[x] = scan1
+            print("Degree: " + str(x) + ", distance: " + str(scan1))
+            time.sleep(.01)
+
+    def choosePath2(self) -> str:
+        print('Considering options...')
+        if self.isClear():
+            return "fwd"
+        else:
+            self.widerScan()
+        avgRight = 0
+        avgLeft = 0
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT):
+            if self.scan[x]:
+                avgRight += self.scan[x]
+        avgRight /= 60
+        print('The average dist on the right is ' + str(avgRight) + 'cm')
+        for x in range(self.MIDPOINT, self.MIDPOINT + 60):
+            if self.scan[x]:
+                avgLeft += self.scan[x]
+        avgLeft /= 60
+        print('The average dist on the left is ' + str(avgLeft) + 'cm')
+        if avgRight > avgLeft:
+            return "right"
+        else:
+            return "left"
+
     def frontClear(self) -> bool:
         for x in range((self.MIDPOINT - 1), (self.MIDPOINT + 1)):
             servo(x)
@@ -89,7 +132,7 @@ class GoPiggy(pigo.Pigo):
                     print("--------- Stop ---------")
                     print('------------------------')
                     self.stop()
-                    answer = self.choosePath()
+                    answer = self.choosePath2()
                     #if left is more clear it goes left other wise it turns right
                     if answer == "left":
                         self.encL(7)
