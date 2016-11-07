@@ -14,7 +14,7 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 96
     STOP_DIST = 20
-    RIGHT_SPEED = 101
+    RIGHT_SPEED = 103
     LEFT_SPEED = 103
 
     # CONSTRUCTOR
@@ -49,7 +49,7 @@ class GoPiggy(pigo.Pigo):
     def widerScan(self):
         # dump all values
         self.flushScan()
-        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +2):
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +10):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
