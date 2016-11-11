@@ -15,7 +15,7 @@ class GoPiggy(pigo.Pigo):
     MIDPOINT = 96
     STOP_DIST = 20
     RIGHT_SPEED = 105
-    LEFT_SPEED = 103
+    LEFT_SPEED = 104
 
     # CONSTRUCTOR
     def __init__(self):
