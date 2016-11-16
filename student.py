@@ -90,55 +90,33 @@ class GoPiggy(pigo.Pigo):
         else:
             return "left"
 
-    def frontClear(self) -> bool:
-        for x in range((self.MIDPOINT - 1), (self.MIDPOINT + 1)):
-            servo(x)
-            time.sleep(.1)
-            scan1 = us_dist(15)
-            time.sleep(.1)
-            # double check the distance
-            scan2 = us_dist(15)
-            time.sleep(.1)
-            # if I found a different distance the second time....
-            if abs(scan1 - scan2) > 2:
-                scan3 = us_dist(15)
-                time.sleep(.1)
-                # take another scan and average the three together
-                scan1 = (scan1 + scan2 + scan3) / 3
-            self.scan[x] = scan1
-            print("Degree: " + str(x) + ", distance: " + str(scan1))
-            if scan1 < self.STOP_DIST:
-                print('------------------------')
-                print("Doesn't look clear to me")
-                print('------------------------')
-                return False
-        return True
-
     def cruise(self):
         print('------------------------')
         print(" is it clear in front? ")
         print('------------------------')
         #made a front clear which only scans the front
-        clear = self.frontClear()
+        clear = self.isClear()
         print(clear)
+        print('------------------------')
+        print("------- Moving ---------")
+        print('------------------------')
+        if clear:
+            fwd()
         while True:
-            if clear:
+            #once its no longer clear it stops and checks which way to go
+            if us_dist(15) < self.STOP_DIST:
                 print('------------------------')
-                print("------- Moving ---------")
+                print("--------- Stop ---------")
                 print('------------------------')
-                fwd()
-                #once its no longer clear it stops and checks which way to go
-                if not self.frontClear():
-                    print('------------------------')
-                    print("--------- Stop ---------")
-                    print('------------------------')
-                    self.stop()
-                    answer = self.choosePath2()
-                    #if left is more clear it goes left other wise it turns right
-                    if answer == "left":
-                        self.turnL(90)
-                    elif answer == "right":
-                        self.turnR(90)
+                self.stop()
+                #todo new method here so it can shutdown
+                answer = self.choosePath2()
+                #if left is more clear it goes left other wise it turns right
+                if answer == "left":
+                    self.turnL(90)
+                elif answer == "right":
+                    self.turnR(90)
+            time.sleep(.05)
 
     def superClear(self):
         set_speed(150)
