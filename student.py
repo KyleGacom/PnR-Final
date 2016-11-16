@@ -16,6 +16,7 @@ class GoPiggy(pigo.Pigo):
     STOP_DIST = 20
     RIGHT_SPEED = 105
     LEFT_SPEED = 104
+    TIME_PER_DEGREE =  0.00733333333
 
     # CONSTRUCTOR
     def __init__(self):
@@ -135,9 +136,9 @@ class GoPiggy(pigo.Pigo):
                     answer = self.choosePath2()
                     #if left is more clear it goes left other wise it turns right
                     if answer == "left":
-                        self.encL(7)
+                        self.turnL(90)
                     elif answer == "right":
-                        self.encR(7)
+                        self.turnR(90)
 
     def superClear(self):
         set_speed(150)
@@ -209,6 +210,28 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.1)
             #Adds 30 speed after it does the dance and dances again
             x += 30
+
+    #new turn method
+    def turnR(self, deg):
+        #new instance
+        # TIME_PER_DEGREE - the answer to todays email =  0.00733333333
+        print("Let's turn" +str(deg)+ " degrees right")
+        print("that means i turn for"+str(deg*self.TIME_PER_DEGREE)+ " seconds")
+
+        right_rot()
+        time.sleep(deg*self.TIME_PER_DEGREE)
+        self.stop()
+
+    def turnL(self, deg):
+        # new instance
+        # TIME_PER_DEGREE - the answer to todays email =  0.00733333333
+        print("Let's turn" + str(deg) + " degrees right")
+        print("that means i turn for" + str(deg * self.TIME_PER_DEGREE) + " seconds")
+
+        left_rot()
+        time.sleep(deg * self.TIME_PER_DEGREE)
+        self.stop()
+
 
 
 
