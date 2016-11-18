@@ -16,7 +16,9 @@ class GoPiggy(pigo.Pigo):
     STOP_DIST = 20
     RIGHT_SPEED = 105
     LEFT_SPEED = 104
-    TIME_PER_DEGREE =  0.00733333333
+    TIME_PER_DEGREE = 0.00733333333
+    turn_track = 0
+
 
     # CONSTRUCTOR
     def __init__(self):
@@ -109,14 +111,16 @@ class GoPiggy(pigo.Pigo):
                 print("--------- Stop ---------")
                 print('------------------------')
                 self.stop()
-                #todo new method here so it can shutdown
-                answer = self.choosePath2()
-                #if left is more clear it goes left other wise it turns right
-                if answer == "left":
-                    self.turnL(90)
-                elif answer == "right":
-                    self.turnR(90)
+                self.pathChooser()
             time.sleep(.05)
+
+    def pathChooser(self):
+        answer = self.choosePath2()
+        # if left is more clear it goes left other wise it turns right
+        if answer == "left":
+            self.turnL(90)
+        elif answer == "right":
+            self.turnR(90)
 
     def superClear(self):
         set_speed(150)
@@ -188,8 +192,20 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.1)
             #Adds 30 speed after it does the dance and dances again
             x += 30
+    #Other code for TurnR and L
+        #adjusting the tracker so we know how many degrees away our exit is
+        #self.turn_track += deg
+        #print("The exit is " + str(self.turn_track) + " degrees away.")
+        #self.setSpeed(self.LEFT_SPEED,self.RIGHT_SPEED)
+        #Turns
+        #right_rot()
+        #time.sleep(deg * self.TIME_PER_DEGREE)
+        #self.stop
+        #sets speed to normal
+        #self.setSpeed(self.LEFT_SPEED,self.RIGHT_SPEED)
 
-    #new turn method
+
+    #new turn methods more precise than encR and L
     def turnR(self, deg):
         #new instance
         # TIME_PER_DEGREE - the answer to todays email =  0.00733333333
@@ -197,7 +213,7 @@ class GoPiggy(pigo.Pigo):
         print("that means i turn for"+str(deg*self.TIME_PER_DEGREE)+ " seconds")
 
         right_rot()
-        time.sleep(deg*self.TIME_PER_DEGREE)
+        time.sleep(deg * self.TIME_PER_DEGREE)
         self.stop()
 
     def turnL(self, deg):
@@ -210,7 +226,12 @@ class GoPiggy(pigo.Pigo):
         time.sleep(deg * self.TIME_PER_DEGREE)
         self.stop()
 
-
+    def setSpeed(self, left, right):
+        print("Left speed: " +str(left))
+        print("Right speed: " + str(right))
+        set_left speed(left)
+        set_right_speed(right)
+        time.sleep(.05)
 
 
 
