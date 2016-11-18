@@ -104,15 +104,15 @@ class GoPiggy(pigo.Pigo):
         print('------------------------')
         if clear:
             fwd()
-        while True:
-            #once its no longer clear it stops and checks which way to go
-            if us_dist(15) < self.STOP_DIST:
-                print('------------------------')
-                print("--------- Stop ---------")
-                print('------------------------')
-                self.stop()
-                self.pathChooser()
-                time.sleep(.05)
+            while True:
+                #once its no longer clear it stops and checks which way to go
+                if us_dist(15) < self.STOP_DIST:
+                    print('------------------------')
+                    print("--------- Stop ---------")
+                    print('------------------------')
+                    self.stop()
+                    self.pathChooser()
+                    time.sleep(.05)
 
     def pathChooser(self):
         answer = self.choosePath2()
@@ -214,7 +214,7 @@ class GoPiggy(pigo.Pigo):
 
         right_rot()
         time.sleep(deg * self.TIME_PER_DEGREE)
-
+        self.stop()
 
     def turnL(self, deg):
         # new instance
@@ -224,13 +224,13 @@ class GoPiggy(pigo.Pigo):
 
         left_rot()
         time.sleep(deg * self.TIME_PER_DEGREE)
-
+        self.stop()
 
     def setSpeed(self, left, right):
         print("Left speed: " +str(left))
         print("Right speed: " + str(right))
-        set_left_speed(left)
-        set_right_speed(right)
+        set_left_speed(int(left))
+        set_right_speed(int(right))
         time.sleep(.05)
 
 
