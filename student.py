@@ -214,7 +214,7 @@ class GoPiggy(pigo.Pigo):
 
         right_rot()
         time.sleep(deg * self.TIME_PER_DEGREE)
-        self.stop()
+
 
     def turnL(self, deg):
         # new instance
@@ -224,7 +224,7 @@ class GoPiggy(pigo.Pigo):
 
         left_rot()
         time.sleep(deg * self.TIME_PER_DEGREE)
-        self.stop()
+
 
     def setSpeed(self, left, right):
         print("Left speed: " +str(left))
