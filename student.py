@@ -112,7 +112,7 @@ class GoPiggy(pigo.Pigo):
                 print('------------------------')
                 self.stop()
                 self.pathChooser()
-            time.sleep(.05)
+                time.sleep(.05)
 
     def pathChooser(self):
         answer = self.choosePath2()
