@@ -14,7 +14,7 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 96
     STOP_DIST = 20
-    RIGHT_SPEED = 105
+    RIGHT_SPEED = 107
     LEFT_SPEED = 104
     TIME_PER_DEGREE = 0.00733333333
     turn_track = 0
@@ -92,6 +92,8 @@ class GoPiggy(pigo.Pigo):
         else:
             return "left"
 
+
+    #main method for navigating through the maze
     def cruise(self):
         print('------------------------')
         print(" is it clear in front? ")
@@ -102,21 +104,22 @@ class GoPiggy(pigo.Pigo):
         print('------------------------')
         print("------- Moving ---------")
         print('------------------------')
-        if clear:
+        while clear:
             fwd()
-            while True:
-                #once its no longer clear it stops and checks which way to go
-                if us_dist(15) < self.STOP_DIST:
-                    print('------------------------')
-                    print("--------- Stop ---------")
-                    print('------------------------')
-                    self.stop()
-                    self.pathChooser()
-                    time.sleep(.05)
+            #once its no longer clear it stops and checks which way to go
+            if us_dist(15) < self.STOP_DIST:
+                print('------------------------')
+                print("--------- Stop ---------")
+                print('------------------------')
+                self.stop()
+                #method that chooses which way to go
+                self.pathChooser()
+                time.sleep(.05)
 
     def pathChooser(self):
         answer = self.choosePath2()
         # if left is more clear it goes left other wise it turns right
+        #TODO: replace '90' woth a variabel for a smarter option
         if answer == "left":
             self.turnL(90)
         elif answer == "right":
