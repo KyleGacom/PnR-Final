@@ -15,9 +15,10 @@ class GoPiggy(pigo.Pigo):
     MIDPOINT = 96
     STOP_DIST = 20
     RIGHT_SPEED = 107
+    #left is slightly stronger
     LEFT_SPEED = 104
     TIME_PER_DEGREE = 0.00733333333
-    turn_track = 0
+    turn_track = 0.0
 
 
     # CONSTRUCTOR
@@ -50,9 +51,10 @@ class GoPiggy(pigo.Pigo):
         menu.get(ans, [None, error])[1]()
 
     def widerScan(self):
+
         # dump all values
         self.flushScan()
-        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +10):
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +5):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
@@ -74,6 +76,7 @@ class GoPiggy(pigo.Pigo):
         if self.isClear():
             return "fwd"
         else:
+            #added wider scan in instead of the regular scan only differnce with choosePath2
             self.widerScan()
         avgRight = 0
         avgLeft = 0
@@ -119,7 +122,7 @@ class GoPiggy(pigo.Pigo):
     def pathChooser(self):
         answer = self.choosePath2()
         # if left is more clear it goes left other wise it turns right
-        #TODO: replace '90' woth a variabel for a smarter option
+        #TODO: replace '90' with a variabel for a smarter option
         if answer == "left":
             self.turnL(90)
         elif answer == "right":
