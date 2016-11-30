@@ -19,7 +19,7 @@ class GoPiggy(pigo.Pigo):
     LEFT_SPEED = 104
     TIME_PER_DEGREE = 0.00733333333
     turn_track = 0.0
-    RADIUS = 90
+
 
 
     # CONSTRUCTOR
@@ -124,9 +124,9 @@ class GoPiggy(pigo.Pigo):
         answer = self.choosePath2()
         # if left is more clear it goes left other wise it turns right
         if answer == "left":
-            self.turnL(RADIUS)
+            self.turnL(90)
         elif answer == "right":
-            self.turnR(RADIUS)
+            self.turnR(90)
 
     def superClear(self):
         set_speed(150)
