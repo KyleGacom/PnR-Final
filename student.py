@@ -118,12 +118,6 @@ class GoPiggy(pigo.Pigo):
         print('------------------------')
         print(" is it clear in front? ")
         print('------------------------')
-        #made a front clear which only scans the front
-        clear = self.isClear()
-        print(clear)
-        print('------------------------')
-        print("------- Moving ---------")
-        print('------------------------')
         while True:
             # if it's clear in front of me...
             if self.isClear():
