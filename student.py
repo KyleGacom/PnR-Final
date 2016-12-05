@@ -122,7 +122,7 @@ class GoPiggy(pigo.Pigo):
             # if it's clear in front of me...
             if self.isClear():
                 # drive until something's in front of me. Good idea? you decide.
-                self.cruise()
+                self.forward()
                 #decides which way to go
                 turn_target = self.pather()
                 # a positive turn is right
