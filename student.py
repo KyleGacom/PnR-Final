@@ -95,6 +95,23 @@ class GoPiggy(pigo.Pigo):
         else:
             return "left"
 
+    # This method drives forward as long as nothing's in the way
+    def forward(self):
+        # Use the GoPiGo API's method to aim the sensor forward
+        servo(self.MIDPOINT)
+        # give the robot time to move
+        time.sleep(.05)
+        # start driving forward
+        fwd()
+        # start an infinite loop
+        while True:
+            # break the loop if the sensor reading is closer than our stop dist
+            if us_dist(15) < self.STOP_DIST:
+                break
+            # YOU DECIDE: How many seconds do you wait in between a check?
+            time.sleep(.05)
+        # stop if the sensor loop broke
+        self.stop()
 
     #main method for navigating through the maze
     def cruise(self):
@@ -107,14 +124,11 @@ class GoPiggy(pigo.Pigo):
         print('------------------------')
         print("------- Moving ---------")
         print('------------------------')
-        while clear:
-            fwd()
-            #once its no longer clear it stops and checks which way to go
-            if us_dist(15) < self.STOP_DIST:
-                print('------------------------')
-                print("--------- Stop ---------")
-                print('------------------------')
-                self.stop()
+        while True:
+            # if it's clear in front of me...
+            if self.isClear():
+                # drive until something's in front of me. Good idea? you decide.
+                self.cruise()
                 #decides which way to go
                 turn_target = self.pather()
                 # a positive turn is right
@@ -159,7 +173,7 @@ class GoPiggy(pigo.Pigo):
                     count = 0
                 if count > (16 / INC) - 1:
                     #SUCCESS! enough positive reading in a row to count
-                    print('Found an option from ' + str(x - 20) + " to " +str(x))
+                    print('\nFound an option from ' + str(x - 20) + " to " +str(x))
                     count = 0
                     option.append(x - 8)
         ################################################################
