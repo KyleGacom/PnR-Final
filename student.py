@@ -52,7 +52,6 @@ class GoPiggy(pigo.Pigo):
         menu.get(ans, [None, error])[1]()
 
     def widerScan(self):
-
         # dump all values
         self.flushScan()
         for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +5):
@@ -116,17 +115,86 @@ class GoPiggy(pigo.Pigo):
                 print("--------- Stop ---------")
                 print('------------------------')
                 self.stop()
-                #method that chooses which way to go
-                self.pathChooser()
+                #decides which way to go
+                turn_target = self.pather()
+                # a positive turn is right
+                if turn_target > 0:
+                    self.turnR(turn_target)
+                # negative degrees mean left
+                else:
+                    # let's remove the negative with abs()
+                    self.turnL(abs(turn_target))
                 time.sleep(.05)
 
     def pathChooser(self):
-        answer = self.choosePath2()
-        # if left is more clear it goes left other wise it turns right
-        if answer == "left":
-            self.turnL(90)
-        elif answer == "right":
-            self.turnR(90)
+        turn_target = self.pather
+        if turn_target < 0:
+            self.turnR(abs(turn_target))
+        else:
+            self.turnL(turn_target)
+
+
+    #replacement turn method, finds best option to turn
+    def pather(self):
+        #use my made up method widerScan
+        self.widerScan()
+        #count will keep track of contiguous positive readings
+        count = 0
+        #list of all the open paths we detect
+        option = [0]
+        SAFETY_BUFFER = 30
+        #what increment is the widerscan set to
+        INC = 5
+        ################################################################
+        ################       BUILD THE OPTIONS       #################
+        ################################################################
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60):
+            if self.scan[x]:
+                #add 30 if i want, extra safety buffer
+                if self.scan[x] > (self.STOP_DIST + SAFETY_BUFFER):
+                    count += 1
+                #if reading isn't safe...
+                else:
+                    #have to reset the count, this path won't work
+                    count = 0
+                if count > (16 / INC) - 1:
+                    #SUCCESS! enough positive reading in a row to count
+                    print('Found an option from ' + str(x - 20) + " to " +str(x))
+                    count = 0
+                    option.append(x - 8)
+        ################################################################
+        ##############       PICK FROM THE OPTIONS       ###############
+        ################################################################
+        # The biggest angle away from our midpoint we could possibly see is 90
+        bestoption = 90
+        # the turn it would take to get us aimed back toward the exit - experimental
+        ideal = -self.turn_track
+        print("\nTHINKING. Ideal turn: " + str(ideal) + " degrees\n")
+        # x will iterate through all the angles of our path options
+        for x in option:
+            # skip our filler option
+            if x != 0:
+                # the change to the midpoint needed to aim at this path
+                turn = self.MIDPOINT - x
+                # state our logic so debugging is easier
+                print("\nPATH @  " + str(x) + " degrees means a turn of " + str(turn))
+                # if this option is closer to our ideal than our current best option...
+                if abs(ideal - bestoption) > abs(ideal - turn):
+                    # store this turn as the best option
+                    bestoption = turn
+        if bestoption > 0:
+            input("\nABOUT TO TURN RIGHT BY: " + str(bestoption) + " degrees")
+        else:
+            input("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
+        return bestoption
+
+    def backUp(self):
+        if us_dist(15) < 10:
+            print("Too close. Backing up for half a second")
+            bwd()
+            time.sleep(.5)
+            self.stop()
+
 
     def superClear(self):
         set_speed(150)
