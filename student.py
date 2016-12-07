@@ -15,7 +15,6 @@ class GoPiggy(pigo.Pigo):
     MIDPOINT = 96
     STOP_DIST = 20
     RIGHT_SPEED = 107
-    #left is slightly stronger
     LEFT_SPEED = 104
     TIME_PER_DEGREE = 0.00733333333
     turn_track = 0.0
@@ -191,9 +190,9 @@ class GoPiggy(pigo.Pigo):
                     # store this turn as the best option
                     bestoption = turn
         if bestoption > 0:
-            input("\nABOUT TO TURN RIGHT BY: " + str(bestoption) + " degrees")
+            print("\nABOUT TO TURN RIGHT BY: " + str(bestoption) + " degrees")
         else:
-            input("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
+            print("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
         return bestoption
 
     def backUp(self):
