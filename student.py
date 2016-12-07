@@ -97,20 +97,20 @@ class GoPiggy(pigo.Pigo):
     # This method drives forward as long as nothing's in the way
     def forward(self):
         # Use the GoPiGo API's method to aim the sensor forward
-        for x in range((self.MIDPOINT - 10), (self.MIDPOINT + 10), +2):
-            # give the robot time to move
+        servo(self.MIDPOINT)
+        # give the robot time to move
+        time.sleep(.05)
+        # start driving forward
+        fwd()
+        # start an infinite loop
+        while True:
+            # break the loop if the sensor reading is closer than our stop dist
+            if us_dist(15) < self.STOP_DIST:
+                break
+            # YOU DECIDE: How many seconds do you wait in between a check?
             time.sleep(.05)
-            # start driving forward
-            fwd()
-            # start an infinite loop
-            while True:
-                # break the loop if the sensor reading is closer than our stop dist
-                if us_dist(15) < self.STOP_DIST:
-                    break
-                # YOU DECIDE: How many seconds do you wait in between a check?
-                time.sleep(.05)
-            # stop if the sensor loop broke
-            self.stop()
+        # stop if the sensor loop broke
+        self.stop()
 
     #main method for navigating through the maze
     def cruise(self):
