@@ -97,7 +97,7 @@ class GoPiggy(pigo.Pigo):
     # This method drives forward as long as nothing's in the way
     def forward(self):
         # Use the GoPiGo API's method to aim the sensor forward
-        servo(self.MIDPOINT - 5, self.MIDPOINT + 5, +5)
+        for x in range(self.MIDPOINT - 5, self.MIDPOINT + 5, +5)
         # give the robot time to move
         time.sleep(.05)
         # start driving forward
