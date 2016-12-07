@@ -123,15 +123,15 @@ class GoPiggy(pigo.Pigo):
                 # drive until something's in front of me. Good idea? you decide.
                 self.forward()
                 #decides which way to go
-                turn_target = self.pather()
-                # a positive turn is right
-                if turn_target > 0:
-                    self.turnR(turn_target)
-                # negative degrees mean left
-                else:
-                    # let's remove the negative with abs()
-                    self.turnL(abs(turn_target))
-                time.sleep(.05)
+            turn_target = self.pather()
+            # a positive turn is right
+            if turn_target > 0:
+                self.turnR(turn_target)
+            # negative degrees mean left
+            else:
+                # let's remove the negative with abs()
+                self.turnL(abs(turn_target))
+
 
     def pathChooser(self):
         turn_target = self.pather
