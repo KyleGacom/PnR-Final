@@ -97,7 +97,7 @@ class GoPiggy(pigo.Pigo):
     # This method drives forward as long as nothing's in the way
     def forward(self):
         # Use the GoPiGo API's method to aim the sensor forward
-        servo(self.MIDPOINT - 10, self.MIDPOINT + 10, 2)
+        x = self.MIDPOINT - 6
         # give the robot time to move
         time.sleep(.05)
         # start driving forward
@@ -105,10 +105,14 @@ class GoPiggy(pigo.Pigo):
         # start an infinite loop
         while True:
             # break the loop if the sensor reading is closer than our stop dist
+            servo(x)
+            time.sleep(.05)
             if us_dist(15) < self.STOP_DIST:
                 break
             # YOU DECIDE: How many seconds do you wait in between a check?
-            time.sleep(.05)
+            x += 3
+            if x > self.MIDPOINT + 6:
+                x = self.MIDPOINT - 6
         # stop if the sensor loop broke
         self.stop()
 
@@ -122,7 +126,8 @@ class GoPiggy(pigo.Pigo):
             if self.isClear():
                 # drive until something's in front of me. Good idea? you decide.
                 self.forward()
-                #decides which way to go
+            #decides if backup is needed
+            self.backUp()
             turn_target = self.pather()
             # a positive turn is right
             if turn_target > 0:
