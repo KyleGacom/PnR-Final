@@ -110,7 +110,7 @@ class GoPiggy(pigo.Pigo):
             if us_dist(15) < self.STOP_DIST:
                 break
             # YOU DECIDE: How many seconds do you wait in between a check?
-            x += 4
+            x += 2
             if x > self.MIDPOINT + 10:
                 x = self.MIDPOINT - 8
         # stop if the sensor loop broke
