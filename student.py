@@ -108,7 +108,12 @@ class GoPiggy(pigo.Pigo):
             servo(x)
             time.sleep(.05)
             if us_dist(15) < self.STOP_DIST:
-                break
+                self.stop()
+                if us_dist(15) < self.STOP_DIST:
+                    break
+                else:
+                    fwd()
+                    continue
             # YOU DECIDE: How many seconds do you wait in between a check?
             x += 2
             if x > self.MIDPOINT + 10:
