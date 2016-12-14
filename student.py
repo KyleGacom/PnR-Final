@@ -14,8 +14,8 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 96
     STOP_DIST = 20
-    RIGHT_SPEED = 103
-    LEFT_SPEED = 105
+    RIGHT_SPEED = 101
+    LEFT_SPEED = 106
     TIME_PER_DEGREE = 0.00733333333
     turn_track = 0.0
 
